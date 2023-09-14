@@ -20,7 +20,7 @@ export default function Home() {
   const [vehicleList, setVehicleList] = useState<any>([]);
   const [showScanner, setShowScanner] = useState(false);
   const [scanResult, setScanResult] = useState(null);
-  const [vehicle] = useState<any>(mockVehicle);
+  const [vehicle, setVehicle] = useState<any>(mockVehicle);
 
   useEffect(() => {
     if (geoPosition?.coords) {
@@ -61,6 +61,19 @@ export default function Home() {
     }
   }, [scanResult, router]);
 
+  const fakeVehicleProximity = () => {
+    if (geoPosition?.coords.latitude) {
+      const updatedVehicle = {
+        ...vehicle,
+        position: {
+          latitude: geoPosition?.coords.latitude + 0.001,
+          ...vehicle.position,
+        },
+      };
+      setVehicle(updatedVehicle);
+    }
+  };
+
   return (
     <main>
       <div className="container mx-auto box-border px-4">
@@ -70,7 +83,7 @@ export default function Home() {
         </p>
         <h1>Location-based Features</h1>
         <h4>Notifications/Content</h4>
-        <h4>Vehicle List</h4>
+        <h4 onClick={() => fakeVehicleProximity()}>Vehicle List</h4>
         <p>
           Vehicles nearby:{" "}
           {vehicleList?.map((vehicle: any) => (
