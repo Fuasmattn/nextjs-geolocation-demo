@@ -6,7 +6,7 @@ import View from "ol/View.js";
 import Feature from "ol/Feature.js";
 import Point from "ol/geom/Point.js";
 import VectorSource from "ol/source/Vector.js";
-import { Layer, Vector as VectorLayer } from "ol/layer.js";
+import { Vector as VectorLayer } from "ol/layer.js";
 import { fromLonLat } from "ol/proj";
 import { Circle as CircleStyle, Fill, Stroke, Style } from "ol/style.js";
 import useGeoLocation from "../../hooks/useGeolocation";
@@ -85,14 +85,12 @@ const DICEMap = ({ vehicles }: any) => {
         })
       );
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    mapRef.current?.getAllLayers().forEach((layer: Layer) => {
-      layer.getSource()?.refresh();
-    })
-  }, [geoPosition?.coords])
+  }, [
+    geoPosition?.coords.latitude,
+    geoPosition?.coords.longitude,
+    geoPosition?.coords,
+    vehicles,
+  ]);
 
   useEffect(() => {
     if (!mapRef.current) {

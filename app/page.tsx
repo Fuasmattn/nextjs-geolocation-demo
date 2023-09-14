@@ -66,7 +66,7 @@ export default function Home() {
       <div className="container mx-auto box-border px-4">
         <p>
           lat: {geoPosition?.coords.latitude} lon:{" "}
-          {geoPosition?.coords.longitude} h: {geoPosition?.coords.heading}
+          {geoPosition?.coords.longitude}
         </p>
         <h1>Location-based Features</h1>
         <h4>Notifications/Content</h4>
