@@ -37,8 +37,10 @@ export default function Home() {
         )
       );
       console.log(distance);
-      if (distance < 1000 && !shown) {
-        dialogRef.current?.showModal();
+      if (distance < 1000) {
+        if (!shown) {
+          dialogRef.current?.showModal();
+        }
         setNotification("A wild vehicle appeared!");
         setVehicleList([vehicle]);
       } else {
