@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { fromLonLat } from "ol/proj";
 import { QrScanner } from "@yudiel/react-qr-scanner";
 import Point from "ol/geom/Point.js";
@@ -35,7 +35,7 @@ export default function Home() {
           fromLonLat([vehicle.position.longitude, vehicle.position.latitude])
         )
       );
-
+          console.log(distance);
       if (distance < 1000) {
         dialogRef.current?.showModal();
         setNotification("A wild vehicle appeared!");
@@ -61,18 +61,18 @@ export default function Home() {
     }
   }, [scanResult, router]);
 
-  const fakeVehicleProximity = () => {
+  const fakeVehicleProximity = useCallback(() => {
     if (geoPosition?.coords.latitude) {
-      const updatedVehicle = {
-        ...vehicle,
-        position: {
-          latitude: geoPosition?.coords.latitude + 0.001,
-          ...vehicle.position,
-        },
-      };
+      console.log("Moving vehicle near user position");
+      const updatedVehicle = {...vehicle };
+
+      updatedVehicle.position.latitude = geoPosition?.coords.latitude + 0.0001;
+      updatedVehicle.position.longitude = geoPosition?.coords.longitude + 0.001;
+
       setVehicle(updatedVehicle);
     }
-  };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [geoPosition]);
 
   return (
     <main>
