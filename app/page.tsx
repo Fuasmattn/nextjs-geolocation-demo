@@ -19,6 +19,7 @@ export default function Home() {
   const [notification, setNotification] = useState<string | null>();
   const [vehicleList, setVehicleList] = useState<any>([]);
   const [showScanner, setShowScanner] = useState(false);
+  const [shown, setShown] = useState(false);
   const [scanResult, setScanResult] = useState(null);
   const [vehicle, setVehicle] = useState<any>(mockVehicle);
 
@@ -35,10 +36,11 @@ export default function Home() {
           fromLonLat([vehicle.position.longitude, vehicle.position.latitude])
         )
       );
-          console.log(distance);
-      if (distance < 1000) {
+      console.log(distance);
+      if (distance < 1000 && !shown) {
         dialogRef.current?.showModal();
         setNotification("A wild vehicle appeared!");
+        setShown(true);
         setVehicleList([vehicle]);
       } else {
         setNotification(null);
@@ -52,6 +54,7 @@ export default function Home() {
     vehicle.position.latitude,
     geoPosition?.coords,
     vehicle,
+    shown,
   ]);
 
   useEffect(() => {
@@ -64,14 +67,14 @@ export default function Home() {
   const fakeVehicleProximity = useCallback(() => {
     if (geoPosition?.coords.latitude) {
       console.log("Moving vehicle near user position");
-      const updatedVehicle = {...vehicle };
+      const updatedVehicle = { ...vehicle };
 
       updatedVehicle.position.latitude = geoPosition?.coords.latitude + 0.0001;
       updatedVehicle.position.longitude = geoPosition?.coords.longitude + 0.001;
 
       setVehicle(updatedVehicle);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [geoPosition]);
 
   return (
