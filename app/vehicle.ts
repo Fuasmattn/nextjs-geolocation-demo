@@ -1,0 +1,27 @@
+export const mockVehicle: any = {
+  externalEquipmentReference: 'ee32007d-9fd5-600c-1c48-661d20f4d73c',
+  areaId: 'c330bcaf-5516-43f1-bc97-ad6f44ee3486',
+  displayName: 'Test Vehicle #1',
+  owner: null,
+  mode:"autonomous",
+  dispatcher: {
+    systemName: "ICE-UI",
+  },
+  operationalState: "IDLE",
+  releaseConditions: null,
+  position: {
+    latitude: 52.523006,
+    longitude: 13.404985,
+    altitude: 48,
+    heading: 291.6917274938292,
+  },
+  positionAccuracy: null,
+  speed: 5.0,
+  weight: null,
+  mapVersion: 'rev.44,19.04.2021',
+  versionHash: '00642322',
+  versionTag: 'NL_210430_PASS',
+  timestamp: '2021-05-04T06:19:11.267Z',
+  status: 'drifting',
+  reason: null,
+};
