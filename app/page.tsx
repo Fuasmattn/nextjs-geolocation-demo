@@ -40,7 +40,6 @@ export default function Home() {
       if (distance < 1000 && !shown) {
         dialogRef.current?.showModal();
         setNotification("A wild vehicle appeared!");
-        setShown(true);
         setVehicleList([vehicle]);
       } else {
         setNotification(null);
@@ -124,7 +123,10 @@ export default function Home() {
         <p className="text-xl">{vehicle.displayName} wants to talk to you.</p>
         <button
           className="text-lg bg-blue-500 hover:bg-blue-600 active:bg-blue-700 border-none text-blue-50 px-4 py-2"
-          onClick={() => dialogRef.current?.close()}
+          onClick={() => {
+            dialogRef.current?.close();
+            setShown(true);
+          }}
         >
           OK! Relax..
         </button>
