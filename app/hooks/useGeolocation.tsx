@@ -18,6 +18,7 @@ function useGeolocation() {
 
     startWatch();
     return () => stopWatch();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function setCurrentPosition(position: any) {

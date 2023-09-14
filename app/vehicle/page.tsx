@@ -1,29 +1,16 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
-import { Canvas, useFrame, useLoader } from "@react-three/fiber";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { Box, Environment, Grid, OrbitControls } from "@react-three/drei";
+import { useRef } from "react";
+import { Canvas, useLoader } from "@react-three/fiber";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { Environment, Grid, OrbitControls } from "@react-three/drei";
 import { useSearchParams } from "next/navigation";
 import { Leva, useControls } from "leva";
 import { mockVehicle } from "../vehicle";
-import rawRiskmap from "./riskMap-600x600.json";
-import { NumberInput } from "leva/dist/declarations/src/components/Number/number-types";
-
-type Risk = 0 | 1 | 2 | 3 | 4 | 5 | 6;
-
-const colors: Record<Risk, string> = {
-  0: "#1f10ff",
-  1: "#2f20ff",
-  2: "#2f30ff",
-  3: "#3f40ff",
-  4: "#4f50ff",
-  5: "#ff1ff1",
-  6: "#ff0000",
-};
 
 const Scene = () => {
   const scene = useRef<any>();
+  // @ts-ignore
   const model = useLoader(GLTFLoader, "./truck_1.glb");
 
   return (
